@@ -7,7 +7,7 @@ public class AI_Box_Target : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
 
     // Update is called once per frame

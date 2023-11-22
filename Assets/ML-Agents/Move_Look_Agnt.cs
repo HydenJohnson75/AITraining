@@ -20,11 +20,12 @@ public class Move_Look_Agnt : Agent
     [SerializeField] private MeshRenderer floorMeshRenderer;
     private float timer;
     private bool touchingButton;
+    private Quaternion startingRotation;
 
     private void Start()
     {
         fieldOfView = GetComponent<ConeFieldOfView>();
-
+        startingRotation = transform.rotation;
     }
 
     private void Update()
@@ -35,26 +36,28 @@ public class Move_Look_Agnt : Agent
 
         } 
 
-        if(touchingButton)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                target.gameObject.SetActive(true);
-            }
-        }
+        //if(touchingButton)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.E))
+        //    {
+        //        target.gameObject.SetActive(true);
+        //    }
+        //}
 
     }
 
     public override void OnEpisodeBegin()
     {
-        target.gameObject.SetActive(false);
+        //target.gameObject.SetActive(false);
         if(touchedTarget == false) 
         {
             SetReward(0.6f);
         }
         touchingButton = false;
-        transform.localPosition = new Vector3(UnityEngine.Random.Range(-4f, +6f), 0, UnityEngine.Random.Range(-4f, +4f));
-        target.localPosition = new Vector3(UnityEngine.Random.Range(-5f, +3.5f), 0, UnityEngine.Random.Range(-7f, +7f));
+        transform.localPosition = Vector3.zero;
+        transform.rotation = startingRotation;
+        //new Vector3(UnityEngine.Random.Range(-4f, +6f), 0, UnityEngine.Random.Range(-4f, +4f));
+        //target.localPosition = new Vector3(UnityEngine.Random.Range(-5f, +3.5f), 0, UnityEngine.Random.Range(-7f, +7f));
         foundVisibleTargets = false;
         touchedTarget = false;
     }
@@ -65,8 +68,8 @@ public class Move_Look_Agnt : Agent
         sensor.AddObservation(transform.localPosition);
         sensor.AddObservation(target.localPosition);
         sensor.AddObservation(transform.localRotation);
-        sensor.AddObservation(touchingButton ? 1 : 0);
-
+        //sensor.AddObservation(touchingButton ? 1 : 0);
+        sensor.AddObservation(foundVisibleTargets ? 1 : 0);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -83,7 +86,6 @@ public class Move_Look_Agnt : Agent
 
         // Rotate the agent left or right.
         transform.Rotate(Vector3.up * rotateDirection * rotationSpeed * Time.fixedDeltaTime);
-
 
     }
 
