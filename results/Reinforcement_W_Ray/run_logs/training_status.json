@@ -1,0 +1,47 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 499997,
+                "file_path": "results\\Reinforcement_W_Ray\\AICamera\\AICamera-499997.onnx",
+                "reward": null,
+                "creation_time": 1706640610.0239782,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement_W_Ray\\AICamera\\AICamera-499997.pt"
+                ]
+            },
+            {
+                "steps": 999978,
+                "file_path": "results\\Reinforcement_W_Ray\\AICamera\\AICamera-999978.onnx",
+                "reward": null,
+                "creation_time": 1706641229.196867,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement_W_Ray\\AICamera\\AICamera-999978.pt"
+                ]
+            },
+            {
+                "steps": 1000009,
+                "file_path": "results\\Reinforcement_W_Ray\\AICamera\\AICamera-1000009.onnx",
+                "reward": 2.026099920272827,
+                "creation_time": 1706641229.2128708,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement_W_Ray\\AICamera\\AICamera-1000009.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000009,
+            "file_path": "results\\Reinforcement_W_Ray\\AICamera.onnx",
+            "reward": 2.026099920272827,
+            "creation_time": 1706641229.2128708,
+            "auxillary_file_paths": [
+                "results\\Reinforcement_W_Ray\\AICamera\\AICamera-1000009.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

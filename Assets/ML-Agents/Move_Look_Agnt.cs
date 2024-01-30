@@ -9,23 +9,35 @@ using System;
 public class Move_Look_Agnt : Agent
 {
     public Transform target;  // The target object to look at.
-    public float moveSpeed = 5f;
+    public float moveSpeed;
     public float rotationSpeed = 100f;
     private ConeFieldOfView fieldOfView;
     private bool foundVisibleTargets;
     private bool touchedTarget;
+    private float xRotation;
+    private float yRotation;
+    private Rigidbody rb;
 
+    [SerializeField] Camera mainCam;
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material looseMaterial;
     [SerializeField] private MeshRenderer floorMeshRenderer;
     private float timer;
     private bool touchingButton;
     private Quaternion startingRotation;
+    private Quaternion startingCameraRotation;
 
     private void Start()
     {
-        fieldOfView = GetComponent<ConeFieldOfView>();
+        
         startingRotation = transform.rotation;
+        startingCameraRotation = mainCam.transform.rotation;
+    }
+
+    public override void Initialize()
+    {
+        fieldOfView = GetComponent<ConeFieldOfView>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -33,8 +45,7 @@ public class Move_Look_Agnt : Agent
         if (fieldOfView.FindVisableTargets())
         {
             foundVisibleTargets = true;
-
-        } 
+        }
 
         //if(touchingButton)
         //{
@@ -44,20 +55,20 @@ public class Move_Look_Agnt : Agent
         //    }
         //}
 
+        //print(foundVisibleTargets);
+
     }
 
     public override void OnEpisodeBegin()
     {
         //target.gameObject.SetActive(false);
-        if(touchedTarget == false) 
-        {
-            SetReward(0.6f);
-        }
         touchingButton = false;
-        transform.localPosition = Vector3.zero;
+        //transform.localPosition = Vector3.zero;
+        startingCameraRotation = mainCam.transform.rotation;
         transform.rotation = startingRotation;
-        //new Vector3(UnityEngine.Random.Range(-4f, +6f), 0, UnityEngine.Random.Range(-4f, +4f));
-        //target.localPosition = new Vector3(UnityEngine.Random.Range(-5f, +3.5f), 0, UnityEngine.Random.Range(-7f, +7f));
+
+        transform.localPosition = new Vector3(UnityEngine.Random.Range(-4f, +6f), 0, UnityEngine.Random.Range(-4f, +4f));
+        target.localPosition = new Vector3(UnityEngine.Random.Range(-5f, +3.5f), 0, UnityEngine.Random.Range(-7f, +7f));
         foundVisibleTargets = false;
         touchedTarget = false;
     }
@@ -66,26 +77,58 @@ public class Move_Look_Agnt : Agent
     {
         // Observations: Agent's position, target's position, and rotation.
         sensor.AddObservation(transform.localPosition);
-        sensor.AddObservation(target.localPosition);
+        //sensor.AddObservation(target.localPosition);
         sensor.AddObservation(transform.localRotation);
+
         //sensor.AddObservation(touchingButton ? 1 : 0);
         sensor.AddObservation(foundVisibleTargets ? 1 : 0);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // Actions:
-        // - vectorAction[0]: Move forward (1) or backward (-1)
-        // - vectorAction[1]: Rotate left (-1) or right (1)
+
 
         float moveDirection = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
-        float rotateDirection = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
+        float moveRightDirection = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
+        float rotateDirection = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
+        float rotateUpDirection = Mathf.Clamp(actions.ContinuousActions[3], -1f, 1f);
 
-        // Move the agent forward or backward.
-        transform.Translate(Vector3.forward * moveDirection * moveSpeed * Time.fixedDeltaTime);
+        Vector3 camForward = mainCam.transform.forward;
+        Vector3 camRight = mainCam.transform.right;
 
-        // Rotate the agent left or right.
-        transform.Rotate(Vector3.up * rotateDirection * rotationSpeed * Time.fixedDeltaTime);
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        Vector3 cameraRelative = moveDirection * camForward * moveSpeed;
+        Vector3 cameraRightRelative = moveRightDirection * camRight * moveSpeed;
+
+        Vector3 velocity = cameraRelative + cameraRightRelative;
+
+        rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+
+
+        //transform.Rotate(Vector3.up,rotateDirection * rotationSpeed * Time.deltaTime);
+
+        xRotation -= rotateUpDirection * rotationSpeed * Time.deltaTime; 
+
+        xRotation = Mathf.Clamp(xRotation, -80, 80);
+
+        yRotation += rotateDirection * rotationSpeed * Time.deltaTime;
+
+
+        mainCam.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+
+
+        transform.forward = mainCam.transform.forward;
+
+        if(foundVisibleTargets == false)
+        {
+            AddReward(-0.3f/ MaxStep);
+        }
+        if(foundVisibleTargets == true)
+        {
+            AddReward(1f / MaxStep);
+        }
 
     }
 
@@ -94,49 +137,39 @@ public class Move_Look_Agnt : Agent
         ActionSegment<float> continousAction = actionsOut.ContinuousActions;
 
         // Implement manual control for testing.
-        continousAction[0] = Input.GetAxis("Vertical"); // Forward/Backward
-        continousAction[1] = Input.GetAxis("Mouse X"); // Left/Right
+        continousAction[0] = Input.GetAxis("Vertical");
+        continousAction[1] = Input.GetAxis("Horizontal");
+        continousAction[2] = Input.GetAxis("Mouse X"); // Left/Right
+        continousAction[3] = Input.GetAxis("Mouse Y");
+        
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (foundVisibleTargets && collision.TryGetComponent<AI_Box_Target>(out AI_Box_Target target))
+        print(collision.gameObject.tag);
+        print(foundVisibleTargets);
+
+        if (collision.gameObject.tag == "Enemy" && foundVisibleTargets == true)
         {
-            SetReward(1.0f);
+            SetReward(2f);
             floorMeshRenderer.material = winMaterial;
             touchedTarget = true;
             EndEpisode();
         }
-        else
+        else if (collision.gameObject.tag == "Enemy" && foundVisibleTargets == false)
         {
-            SetReward(-0.8f);
-            EndEpisode();
-        }
-        if (collision.TryGetComponent<Wall>(out Wall wall))
-        {
-            SetReward(-1f);
+            SetReward(-0.1f);
             floorMeshRenderer.material = looseMaterial;
             touchedTarget = false;
             EndEpisode();
-        }
+        } 
 
-
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent<Button_Script>(out Button_Script button))
+        if (collision.gameObject.tag == "Wall")
         {
-            touchingButton = true;
-            Debug.Log("colliding");
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent<Button_Script>(out Button_Script button))
-        {
-            touchingButton = false;
+            SetReward(-0.7f);
+            floorMeshRenderer.material = looseMaterial;
+            touchedTarget = false;
+            EndEpisode();
         }
     }
 }

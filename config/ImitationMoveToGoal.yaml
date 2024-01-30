@@ -15,12 +15,15 @@ behaviors:
       hidden_units: 128
       num_layers: 2
     reward_signals:
-        extrinsic:    
-            gamma: 0.99     
-            strength: 1.0
+        extrinsic:  
+            gamma: 0.99 
+            strength: 1.0        
+        gail:
+            strength: 0.5
+            demo_path: ImitationAICamera/FYP-ImitationRan.demo
     behavioral_cloning:
-        strength: 1.0
-        demo_path: ImitationAICamera/ImitationWithFul.demo
-    max_steps: 5000000
+        strength: 0.5
+        demo_path: ImitationAICamera/FYP-ImitationRan.demo
+    max_steps: 1000000
     time_horizon: 64
-    summary_freq: 10000
+    summary_freq: 5000

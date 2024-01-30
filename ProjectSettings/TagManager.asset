@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - AI Target
+  - Enemy
+  - Wall
+  - Floor
   layers:
   - Default
   - TransparentFX

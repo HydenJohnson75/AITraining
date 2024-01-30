@@ -1,0 +1,47 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 499957,
+                "file_path": "results\\Imitation_Random\\AICamera\\AICamera-499957.onnx",
+                "reward": null,
+                "creation_time": 1701870433.1816661,
+                "auxillary_file_paths": [
+                    "results\\Imitation_Random\\AICamera\\AICamera-499957.pt"
+                ]
+            },
+            {
+                "steps": 999951,
+                "file_path": "results\\Imitation_Random\\AICamera\\AICamera-999951.onnx",
+                "reward": null,
+                "creation_time": 1701870843.8837643,
+                "auxillary_file_paths": [
+                    "results\\Imitation_Random\\AICamera\\AICamera-999951.pt"
+                ]
+            },
+            {
+                "steps": 1000067,
+                "file_path": "results\\Imitation_Random\\AICamera\\AICamera-1000067.onnx",
+                "reward": -0.5,
+                "creation_time": 1701870843.9038708,
+                "auxillary_file_paths": [
+                    "results\\Imitation_Random\\AICamera\\AICamera-1000067.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000067,
+            "file_path": "results\\Imitation_Random\\AICamera.onnx",
+            "reward": -0.5,
+            "creation_time": 1701870843.9038708,
+            "auxillary_file_paths": [
+                "results\\Imitation_Random\\AICamera\\AICamera-1000067.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

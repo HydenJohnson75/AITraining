@@ -320,6 +320,7 @@ MonoBehaviour:
   target: {fileID: 4953092758096689242}
   moveSpeed: 50
   rotationSpeed: 200
+  mainCam: {fileID: 0}
   winMaterial: {fileID: 2100000, guid: 80b63e6aab1ca604d911461d56ca744c, type: 2}
   looseMaterial: {fileID: 2100000, guid: b4b64cc0111df364c9ff0113401cb5ed, type: 2}
   floorMeshRenderer: {fileID: 1811680229937623818}

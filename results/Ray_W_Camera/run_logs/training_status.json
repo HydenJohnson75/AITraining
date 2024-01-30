@@ -1,0 +1,29 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 317036,
+                "file_path": "results\\Ray_W_Camera\\AICamera\\AICamera-317036.onnx",
+                "reward": null,
+                "creation_time": 1706647451.1805005,
+                "auxillary_file_paths": [
+                    "results\\Ray_W_Camera\\AICamera\\AICamera-317036.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 317036,
+            "file_path": "results\\Ray_W_Camera\\AICamera.onnx",
+            "reward": null,
+            "creation_time": 1706647451.1805005,
+            "auxillary_file_paths": [
+                "results\\Ray_W_Camera\\AICamera\\AICamera-317036.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

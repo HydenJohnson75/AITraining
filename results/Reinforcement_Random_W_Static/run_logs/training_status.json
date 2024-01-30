@@ -1,0 +1,47 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 499949,
+                "file_path": "results\\Reinforcement_Random_W_Static\\AICamera\\AICamera-499949.onnx",
+                "reward": -0.16666666666666666,
+                "creation_time": 1701867776.174361,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement_Random_W_Static\\AICamera\\AICamera-499949.pt"
+                ]
+            },
+            {
+                "steps": 999967,
+                "file_path": "results\\Reinforcement_Random_W_Static\\AICamera\\AICamera-999967.onnx",
+                "reward": null,
+                "creation_time": 1701867910.9186373,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement_Random_W_Static\\AICamera\\AICamera-999967.pt"
+                ]
+            },
+            {
+                "steps": 1000031,
+                "file_path": "results\\Reinforcement_Random_W_Static\\AICamera\\AICamera-1000031.onnx",
+                "reward": null,
+                "creation_time": 1701867910.932712,
+                "auxillary_file_paths": [
+                    "results\\Reinforcement_Random_W_Static\\AICamera\\AICamera-1000031.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1000031,
+            "file_path": "results\\Reinforcement_Random_W_Static\\AICamera.onnx",
+            "reward": null,
+            "creation_time": 1701867910.932712,
+            "auxillary_file_paths": [
+                "results\\Reinforcement_Random_W_Static\\AICamera\\AICamera-1000031.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
