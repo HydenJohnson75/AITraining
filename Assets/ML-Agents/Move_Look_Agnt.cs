@@ -9,7 +9,7 @@ using System;
 public class Move_Look_Agnt : Agent
 {
     public Transform target;  // The target object to look at.
-    public float moveSpeed;
+    public float moveSpeed =5f;
     public float rotationSpeed = 100f;
     private ConeFieldOfView fieldOfView;
     private bool foundVisibleTargets;
@@ -18,6 +18,7 @@ public class Move_Look_Agnt : Agent
     private float yRotation;
     private Rigidbody rb;
 
+    [SerializeField] GameObject startPosition;
     [SerializeField] Camera mainCam;
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material looseMaterial;
@@ -63,7 +64,7 @@ public class Move_Look_Agnt : Agent
     {
         //target.gameObject.SetActive(false);
         touchingButton = false;
-        //transform.localPosition = Vector3.zero;
+        //transform.position = startPosition.transform.position;
         startingCameraRotation = mainCam.transform.rotation;
         transform.rotation = startingRotation;
 
@@ -88,10 +89,10 @@ public class Move_Look_Agnt : Agent
     {
 
 
-        float moveDirection = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
-        float moveRightDirection = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
-        float rotateDirection = Mathf.Clamp(actions.ContinuousActions[2], -1f, 1f);
-        float rotateUpDirection = Mathf.Clamp(actions.ContinuousActions[3], -1f, 1f);
+        float moveDirection = actions.ContinuousActions[0];
+        float moveRightDirection = actions.ContinuousActions[1];
+        float rotateDirection = actions.ContinuousActions[2];
+        float rotateUpDirection = actions.ContinuousActions[3];
 
         Vector3 camForward = mainCam.transform.forward;
         Vector3 camRight = mainCam.transform.right;
@@ -102,7 +103,9 @@ public class Move_Look_Agnt : Agent
         Vector3 cameraRelative = moveDirection * camForward * moveSpeed;
         Vector3 cameraRightRelative = moveRightDirection * camRight * moveSpeed;
 
-        Vector3 velocity = cameraRelative + cameraRightRelative;
+        Vector3 velocity = (moveDirection * transform.forward + moveRightDirection * transform.right) * moveSpeed;
+
+        //cameraRelative + cameraRightRelative;
 
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
 
@@ -111,7 +114,7 @@ public class Move_Look_Agnt : Agent
 
         xRotation -= rotateUpDirection * rotationSpeed * Time.deltaTime; 
 
-        xRotation = Mathf.Clamp(xRotation, -80, 80);
+        xRotation = Mathf.Clamp(xRotation, -60, 60);
 
         yRotation += rotateDirection * rotationSpeed * Time.deltaTime;
 
@@ -121,15 +124,12 @@ public class Move_Look_Agnt : Agent
 
         transform.forward = mainCam.transform.forward;
 
-        if(foundVisibleTargets == false)
-        {
-            AddReward(-0.3f/ MaxStep);
-        }
         if(foundVisibleTargets == true)
         {
-            AddReward(1f / MaxStep);
+            AddReward(0.4f/MaxStep);
         }
 
+        AddReward(-0.1f/MaxStep);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -151,14 +151,14 @@ public class Move_Look_Agnt : Agent
 
         if (collision.gameObject.tag == "Enemy" && foundVisibleTargets == true)
         {
-            SetReward(2f);
+            AddReward(2f);
             floorMeshRenderer.material = winMaterial;
             touchedTarget = true;
             EndEpisode();
         }
         else if (collision.gameObject.tag == "Enemy" && foundVisibleTargets == false)
         {
-            SetReward(-0.1f);
+            AddReward(0.3f);
             floorMeshRenderer.material = looseMaterial;
             touchedTarget = false;
             EndEpisode();
@@ -166,10 +166,12 @@ public class Move_Look_Agnt : Agent
 
         if (collision.gameObject.tag == "Wall")
         {
-            SetReward(-0.7f);
+            AddReward(-0.8f);
             floorMeshRenderer.material = looseMaterial;
             touchedTarget = false;
             EndEpisode();
         }
+
+        
     }
 }
