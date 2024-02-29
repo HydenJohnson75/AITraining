@@ -189,7 +189,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967291
   m_ObservationStacks: 1
-  m_AlternatingRayOrder: 1
+  m_AlternatingRayOrder: 0
   rayHitColor: {r: 0, g: 1, b: 0.292619, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967291
   m_ObservationStacks: 1
-  m_AlternatingRayOrder: 1
+  m_AlternatingRayOrder: 0
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
@@ -271,7 +271,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 290960920826729831, guid: b27e86e90055820428e3ff1fad6a9309, type: 3}
       propertyPath: MaxStep
-      value: 5000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 290960920826729831, guid: b27e86e90055820428e3ff1fad6a9309, type: 3}
       propertyPath: mainCam
