@@ -1,0 +1,56 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 499984,
+                "file_path": "results\\Intrtim_Train\\AICamera\\AICamera-499984.onnx",
+                "reward": null,
+                "creation_time": 1709805134.098147,
+                "auxillary_file_paths": [
+                    "results\\Intrtim_Train\\AICamera\\AICamera-499984.pt"
+                ]
+            },
+            {
+                "steps": 999985,
+                "file_path": "results\\Intrtim_Train\\AICamera\\AICamera-999985.onnx",
+                "reward": 0.8672526656313145,
+                "creation_time": 1709805640.0906553,
+                "auxillary_file_paths": [
+                    "results\\Intrtim_Train\\AICamera\\AICamera-999985.pt"
+                ]
+            },
+            {
+                "steps": 1499992,
+                "file_path": "results\\Intrtim_Train\\AICamera\\AICamera-1499992.onnx",
+                "reward": 0.9204562567174435,
+                "creation_time": 1709806188.8983424,
+                "auxillary_file_paths": [
+                    "results\\Intrtim_Train\\AICamera\\AICamera-1499992.pt"
+                ]
+            },
+            {
+                "steps": 1514147,
+                "file_path": "results\\Intrtim_Train\\AICamera\\AICamera-1514147.onnx",
+                "reward": 0.9755491103444781,
+                "creation_time": 1709806208.0579152,
+                "auxillary_file_paths": [
+                    "results\\Intrtim_Train\\AICamera\\AICamera-1514147.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1514147,
+            "file_path": "results\\Intrtim_Train\\AICamera.onnx",
+            "reward": 0.9755491103444781,
+            "creation_time": 1709806208.0579152,
+            "auxillary_file_paths": [
+                "results\\Intrtim_Train\\AICamera\\AICamera-1514147.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cpu"
+    }
+}

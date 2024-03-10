@@ -1,0 +1,29 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 113041,
+                "file_path": "results\\Train_RandomPos\\AICamera\\AICamera-113041.onnx",
+                "reward": null,
+                "creation_time": 1709812898.2135668,
+                "auxillary_file_paths": [
+                    "results\\Train_RandomPos\\AICamera\\AICamera-113041.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 113041,
+            "file_path": "results\\Train_RandomPos\\AICamera.onnx",
+            "reward": null,
+            "creation_time": 1709812898.2135668,
+            "auxillary_file_paths": [
+                "results\\Train_RandomPos\\AICamera\\AICamera-113041.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cpu"
+    }
+}

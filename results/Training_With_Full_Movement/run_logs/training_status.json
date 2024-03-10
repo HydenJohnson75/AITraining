@@ -1,0 +1,47 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 499992,
+                "file_path": "results\\Training_With_Full_Movement\\AICamera\\AICamera-499992.onnx",
+                "reward": 0.8214999935589731,
+                "creation_time": 1709758120.8246117,
+                "auxillary_file_paths": [
+                    "results\\Training_With_Full_Movement\\AICamera\\AICamera-499992.pt"
+                ]
+            },
+            {
+                "steps": 999997,
+                "file_path": "results\\Training_With_Full_Movement\\AICamera\\AICamera-999997.onnx",
+                "reward": 0.8265059561956496,
+                "creation_time": 1709759200.7418385,
+                "auxillary_file_paths": [
+                    "results\\Training_With_Full_Movement\\AICamera\\AICamera-999997.pt"
+                ]
+            },
+            {
+                "steps": 1002001,
+                "file_path": "results\\Training_With_Full_Movement\\AICamera\\AICamera-1002001.onnx",
+                "reward": 0.9642045497894287,
+                "creation_time": 1709759212.9352305,
+                "auxillary_file_paths": [
+                    "results\\Training_With_Full_Movement\\AICamera\\AICamera-1002001.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1002001,
+            "file_path": "results\\Training_With_Full_Movement\\AICamera.onnx",
+            "reward": 0.9642045497894287,
+            "creation_time": 1709759212.9352305,
+            "auxillary_file_paths": [
+                "results\\Training_With_Full_Movement\\AICamera\\AICamera-1002001.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cpu"
+    }
+}

@@ -9,7 +9,7 @@ using System;
 public class Move_Look_Agnt : Agent
 {
     public Transform target;  // The target object to look at.
-    public float moveSpeed =5f;
+    float moveSpeed =8f;
     public float rotationSpeed = 100f;
     private bool touchedTarget;
     private float xRotation;
@@ -52,7 +52,7 @@ public class Move_Look_Agnt : Agent
         }
         timer -= Time.deltaTime;
 
-        print(GetCumulativeReward());
+
     }
 
     private void UpdateLookingAtTarget()
@@ -105,12 +105,11 @@ public class Move_Look_Agnt : Agent
     public override void OnEpisodeBegin()
     {
         //target.gameObject.SetActive(false);
-        transform.position = startPosition.transform.position;
+        //transform.position = startPosition.transform.position;
         mainCam.transform.rotation  = startingCameraRotation; 
         transform.rotation = startingRotation;
-
-        //transform.localPosition = new Vector3(UnityEngine.Random.Range(-4f, +6f), 0, UnityEngine.Random.Range(-4f, +4f));
-        //target.localPosition = new Vector3(UnityEngine.Random.Range(-5f, +3.5f), 0, UnityEngine.Random.Range(-7f, +7f));
+        transform.localPosition = new Vector3(UnityEngine.Random.Range(-4f, +6f), 0, UnityEngine.Random.Range(-4f, +4f));
+        target.localPosition = new Vector3(UnityEngine.Random.Range(-5f, +3.5f), 0, UnityEngine.Random.Range(-7f, +7f));
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -131,15 +130,41 @@ public class Move_Look_Agnt : Agent
 
         float moveDirection = actions.ContinuousActions[0];
         float moveRightDirection = actions.ContinuousActions[1];
-
+        float rotateDirection = actions.ContinuousActions[2];
+        float rotateUpDirection = actions.ContinuousActions[3];
 
         // Calculate movement based on input
         Vector3 move = transform.forward * moveDirection * moveSpeed * Time.deltaTime;
         move += transform.right * moveRightDirection * moveSpeed * Time.deltaTime;
 
         // Apply movement
-        rb.MovePosition(transform.position + move);
+        rb.velocity = ((transform.forward * moveDirection + transform.right * moveRightDirection) * moveSpeed);
 
+        // Calculate rotation based on input
+        float rotation = rotateDirection * rotationSpeed * Time.deltaTime;
+        float rotationUp = rotateUpDirection * rotationSpeed * Time.deltaTime;
+
+        // Apply rotation to the agent's Y-axis (horizontal rotation)
+        transform.Rotate(0, rotation, 0);
+
+        // Rotate the camera based on vertical input
+        xRotation -= rotationUp;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Clamp vertical rotation to prevent flipping
+        mainCam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        rayObject.transform.localRotation = mainCam.transform.localRotation;
+
+        // Apply movement
+        //rb.MovePosition(transform.position + move);
+
+        if (isLookingAtTarget)
+        {
+            AddReward(2f / MaxStep);
+        }
+
+        if(isLookingAtFloor)
+        {
+            AddReward(-1f / MaxStep);
+        }
 
     }
 
@@ -150,7 +175,8 @@ public class Move_Look_Agnt : Agent
         // Implement manual control for testing.
         continousAction[0] = Input.GetAxis("Vertical");
         continousAction[1] = Input.GetAxis("Horizontal");
-
+        continousAction[2] = Input.GetAxis("Horizontal2");
+        continousAction[3] = Input.GetAxis("Vertical2");
 
     }
 
@@ -169,12 +195,13 @@ public class Move_Look_Agnt : Agent
         {
             floorMeshRenderer.material = looseMaterial;
             touchedTarget = false;
+            AddReward(0.5f);
             EndEpisode();
         } 
 
         if (collision.gameObject.tag == "Wall")
         {
-            AddReward(-0.5f);
+            AddReward(-1.5f);
             floorMeshRenderer.material = looseMaterial;
             touchedTarget = false;
             EndEpisode();
