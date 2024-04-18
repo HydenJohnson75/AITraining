@@ -1,0 +1,65 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 46999989,
+                "file_path": "results\\Shoot_Single_Train\\AICamera\\AICamera-46999989.onnx",
+                "reward": 2.625256943802978,
+                "creation_time": 1710154486.1832974,
+                "auxillary_file_paths": [
+                    "results\\Shoot_Single_Train\\AICamera\\AICamera-46999989.pt"
+                ]
+            },
+            {
+                "steps": 47499949,
+                "file_path": "results\\Shoot_Single_Train\\AICamera\\AICamera-47499949.onnx",
+                "reward": 2.608198017294589,
+                "creation_time": 1710154765.1227584,
+                "auxillary_file_paths": [
+                    "results\\Shoot_Single_Train\\AICamera\\AICamera-47499949.pt"
+                ]
+            },
+            {
+                "steps": 47999937,
+                "file_path": "results\\Shoot_Single_Train\\AICamera\\AICamera-47999937.onnx",
+                "reward": 2.5702393585568064,
+                "creation_time": 1710155092.8792012,
+                "auxillary_file_paths": [
+                    "results\\Shoot_Single_Train\\AICamera\\AICamera-47999937.pt"
+                ]
+            },
+            {
+                "steps": 48499983,
+                "file_path": "results\\Shoot_Single_Train\\AICamera\\AICamera-48499983.onnx",
+                "reward": 3.107182988669443,
+                "creation_time": 1710155377.2643626,
+                "auxillary_file_paths": [
+                    "results\\Shoot_Single_Train\\AICamera\\AICamera-48499983.pt"
+                ]
+            },
+            {
+                "steps": 48980261,
+                "file_path": "results\\Shoot_Single_Train\\AICamera\\AICamera-48980261.onnx",
+                "reward": 3.232593634505316,
+                "creation_time": 1710155664.231314,
+                "auxillary_file_paths": [
+                    "results\\Shoot_Single_Train\\AICamera\\AICamera-48980261.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 48980261,
+            "file_path": "results\\Shoot_Single_Train\\AICamera.onnx",
+            "reward": 3.232593634505316,
+            "creation_time": 1710155664.231314,
+            "auxillary_file_paths": [
+                "results\\Shoot_Single_Train\\AICamera\\AICamera-48980261.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cpu"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 41540,
+                "file_path": "results\\KillHouse_Shoot_Train\\AICamera\\AICamera-41540.onnx",
+                "reward": -1.6,
+                "creation_time": 1710121535.812203,
+                "auxillary_file_paths": [
+                    "results\\KillHouse_Shoot_Train\\AICamera\\AICamera-41540.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 41540,
+            "file_path": "results\\KillHouse_Shoot_Train\\AICamera.onnx",
+            "reward": -1.6,
+            "creation_time": 1710121535.812203,
+            "auxillary_file_paths": [
+                "results\\KillHouse_Shoot_Train\\AICamera\\AICamera-41540.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cpu"
+    }
+}

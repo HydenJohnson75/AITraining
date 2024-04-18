@@ -1,0 +1,29 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 65037,
+                "file_path": "results\\TestingToShoot\\AICamera\\AICamera-65037.onnx",
+                "reward": -1.1411765077534843,
+                "creation_time": 1710900263.4213095,
+                "auxillary_file_paths": [
+                    "results\\TestingToShoot\\AICamera\\AICamera-65037.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 65037,
+            "file_path": "results\\TestingToShoot\\AICamera.onnx",
+            "reward": -1.1411765077534843,
+            "creation_time": 1710900263.4213095,
+            "auxillary_file_paths": [
+                "results\\TestingToShoot\\AICamera\\AICamera-65037.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cpu"
+    }
+}
