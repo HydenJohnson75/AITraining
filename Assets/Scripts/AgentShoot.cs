@@ -58,7 +58,7 @@ public class AgentShoot : MonoBehaviour
 
         if (!enemyHit && ai != null)
         {
-            ai.AddReward(-0.1f);
+            ai.AddReward(-0.1f/ai.MaxStep);
         }
     }
 

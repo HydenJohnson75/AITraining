@@ -264,6 +264,8 @@ MonoBehaviour:
   ai: {fileID: 2821944659328027884}
   shootPos: {fileID: 1443787942451924605}
   mainCam: {fileID: 3254465468973186468}
+  floorMeshRenderer: {fileID: 0}
+  winMaterial: {fileID: 0}
 --- !u!114 &5280726585837838275
 MonoBehaviour:
   m_ObjectHideFlags: 0

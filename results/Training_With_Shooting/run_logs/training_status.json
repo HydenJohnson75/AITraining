@@ -1,0 +1,47 @@
+{
+    "AICamera": {
+        "checkpoints": [
+            {
+                "steps": 499989,
+                "file_path": "results\\Training_With_Shooting\\AICamera\\AICamera-499989.onnx",
+                "reward": 0.3746025037817162,
+                "creation_time": 1713970808.264638,
+                "auxillary_file_paths": [
+                    "results\\Training_With_Shooting\\AICamera\\AICamera-499989.pt"
+                ]
+            },
+            {
+                "steps": 999950,
+                "file_path": "results\\Training_With_Shooting\\AICamera\\AICamera-999950.onnx",
+                "reward": 0.9994159856898477,
+                "creation_time": 1713971535.4939945,
+                "auxillary_file_paths": [
+                    "results\\Training_With_Shooting\\AICamera\\AICamera-999950.pt"
+                ]
+            },
+            {
+                "steps": 1112719,
+                "file_path": "results\\Training_With_Shooting\\AICamera\\AICamera-1112719.onnx",
+                "reward": null,
+                "creation_time": 1713971689.5271354,
+                "auxillary_file_paths": [
+                    "results\\Training_With_Shooting\\AICamera\\AICamera-1112719.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1112719,
+            "file_path": "results\\Training_With_Shooting\\AICamera.onnx",
+            "reward": null,
+            "creation_time": 1713971689.5271354,
+            "auxillary_file_paths": [
+                "results\\Training_With_Shooting\\AICamera\\AICamera-1112719.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.2.1+cpu"
+    }
+}
