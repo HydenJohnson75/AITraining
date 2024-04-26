@@ -117,20 +117,11 @@ public class Move_Look_Agnt : Agent
     public override void OnEpisodeBegin()
     {
 
-        spawnedEnemy = Instantiate(enemyObject, singleSpawnLoc.transform.position, singleSpawnLoc.transform.rotation);
-
-        if (targetLocations.Count > 0)
-        {
-            foreach (Transform target in targetLocations)
-            {
-                Instantiate(enemyObject, target.position, target.rotation);
-            }
-        }
 
 
         numOfHits = 0;
         //target.gameObject.SetActive(false);
-        transform.position = startPosition.transform.position;
+        transform.localPosition = Vector3.zero;
         //transform.localPosition = new Vector3(UnityEngine.Random.Range(-4f, +6f), 0, UnityEngine.Random.Range(-4f, +4f));
        // target.localPosition = new Vector3(UnityEngine.Random.Range(-5f, +3.5f), 0, UnityEngine.Random.Range(-7f, +7f));
     }
@@ -153,7 +144,7 @@ public class Move_Look_Agnt : Agent
         float moveRightDirection = actions.ContinuousActions[1];
         float rotateDirection = actions.ContinuousActions[2];
         float rotateUpDirection = actions.ContinuousActions[3];
-        ActionSegment<int> discreteActions = actions.DiscreteActions;
+        //ActionSegment<int> discreteActions = actions.DiscreteActions;
 
         rb.velocity = ((transform.forward * moveDirection + transform.right * moveRightDirection) * moveSpeed);
         // Calculate rotation based on input
@@ -172,11 +163,6 @@ public class Move_Look_Agnt : Agent
 
         rayObject.transform.localRotation = mainCam.transform.localRotation;
 
-        if (discreteActions[0] == 1)
-        {
-            print("discrete working");
-            _aiShoot.Shoot();
-        }
 
     }
 
@@ -195,26 +181,42 @@ public class Move_Look_Agnt : Agent
     private void OnTriggerEnter(Collider collision)
     {
 
+        if (collision.gameObject.tag == "Enemy" && isLookingAtTarget == true)
+        {
+            AddReward(1f);
+            if(floorMeshRenderer != null)
+            {
+                floorMeshRenderer.material = winMaterial;
+            }
+            touchedTarget = true;
+            EndEpisode();
+        }
+        else if (collision.gameObject.tag == "Enemy" && isLookingAtTarget == false)
+        {
+            if(floorMeshRenderer != null)
+            {
+                floorMeshRenderer.material = looseMaterial;
+            }
+            touchedTarget = false;
+            AddReward(0.5f);
+            EndEpisode();
+        }
+
         if (collision.gameObject.tag == "Wall")
         {
             AddReward(-1.5f);
-            floorMeshRenderer.material = looseMaterial;
+            if(floorMeshRenderer != null)
+            {
+                floorMeshRenderer.material = looseMaterial;
+            }
             Destroy(spawnedEnemy);
             EndEpisode();
         }
 
-        if(collision.gameObject.tag == "Checkpoint")
-        {
-            if(numOfHits >= 4)
-            {
-                AddReward(1.5f);
-                EndEpisode();
-            }
-            else
-            {
-                AddReward(-0.5f);
-                EndEpisode();
-            }
-        }
+    }
+
+    public void Kill()
+    {
+        Destroy(this.gameObject);
     }
 }

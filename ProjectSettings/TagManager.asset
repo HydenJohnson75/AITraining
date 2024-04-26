@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Floor
   - Checkpoint
+  - AI
   layers:
   - Default
   - TransparentFX
